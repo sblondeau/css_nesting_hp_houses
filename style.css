@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'Harry Potter';
+    src: url(fonts/HarryP.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    --primary-dark: color-mix(in srgb, var(--primary) 50%, black);
+}
+
+body {
+    background-image: url(images/background.jpg);
+    background-size: 350px;
+    margin: 0;
+    font-family: 'Harry Potter';
+
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    perspective: 1000px;
+    gap: 1rem;
+    margin: auto;
+    height: 100vmax;
+
+    &:has(article:hover) {
+        & article:not(:hover) {
+            filter: saturate(10%) brightness(50%);
+        }
+    }
+
+    @media screen and (width<800px) {
+        rotate: -90deg;
+    }
+}
+
+article {
+    --flag-height: 80vh;
+    --flag-width: clamp(150px, 20vmax, 250px);
+    --cut-size: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background-image: url("images/pattern.png");
+    background-color: var(--primary, grey);
+    padding: 1rem;
+    block-size: var(--flag-height);
+    inline-size: var(--flag-width);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - var(--cut-size)), 0% 100%);
+    transition: translate 1s ease-in-out 0.2s, filter 0.5s;
+    translate: 0  var(--translate, -40vh);
+    rotate: x var(--rotate, 0);
+    transform-origin: top;
+    animation: balance ease-in-out 2s var(--delay, 0s) infinite alternate;
+
+    & h2 {
+        text-transform: capitalize;
+        margin-block-end: calc(var(--cut-size) * 1.5);
+    }
+
+    &.gryffindor {
+        --primary: #9d241f;
+    }
+
+    &.slytherin {
+        --primary: #2f7453;
+        --delay: 0.8s;
+    }
+
+    &.ravenclaw {
+        --primary: #3c4aa2;
+        --delay: 0.2s;
+    }
+
+    &.hufflepuff {
+        --primary: #c2b650;
+        --delay: 0.5s;
+    }
+
+    &:hover {
+        --translate: 0;
+        --speed: 3s;
+    }
+}
+
+@keyframes balance {
+    from {
+        rotate: x var(--rotate, -5deg);
+    }
+
+    to {
+        rotate: x var(--rotate, 5deg);
+    }
+}
