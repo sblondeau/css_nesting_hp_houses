@@ -51,7 +51,7 @@ article {
     inline-size: var(--flag-width);
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - var(--cut-size)), 0% 100%);
     transition: translate 1s ease-in-out 0.2s, filter 0.5s;
-    translate: 0  var(--translate, -40vh);
+    translate: 0 var(--translate, -40vh);
     rotate: x var(--rotate, 0);
     transform-origin: top;
     animation: balance ease-in-out 2s var(--delay, 0s) infinite alternate;
